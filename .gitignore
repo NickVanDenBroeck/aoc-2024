@@ -1,1 +1,15 @@
 .vs/
+
+bin/
+obj/
+*.dll
+
+dist/
+build/
+out/
+
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
