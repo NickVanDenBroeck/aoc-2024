@@ -50,7 +50,7 @@ public class Day1Should
     public void ReadAndProcessData_ValidFile_ReturnsCorrectLists()
     {
         // Arrange
-        string filePath = "Input.txt";
+        string filePath = ".\\Day1\\Input.txt";
 
         // Act
         (List<int> list1, List<int> list2) = Day1Solution.ReadAndProcessData(filePath);
