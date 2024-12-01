@@ -11,7 +11,7 @@
             Console.WriteLine("Sum of Distances: " + sumOfDistances);
         }
 
-        private static (List<int>, List<int>) ReadAndProcessData(string filePath)
+        public static (List<int>, List<int>) ReadAndProcessData(string filePath)
         {
             List<int> list1 = new List<int>();
             List<int> list2 = new List<int>();
@@ -29,14 +29,14 @@
             return (list1, list2);
         }
 
-        private static (List<int>, List<int>) SortLists(List<int> list1, List<int> list2)
+        public static (List<int>, List<int>) SortLists(List<int> list1, List<int> list2)
         {
             list1.Sort();
             list2.Sort();
             return (list1, list2);
         }
 
-        private static int CalculateSumOfDistances(List<int> list1, List<int> list2)
+        public static int CalculateSumOfDistances(List<int> list1, List<int> list2)
         {
             int sumOfDistances = 0;
 
