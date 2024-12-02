@@ -8,7 +8,7 @@
             var (sortedList1, sortedList2) = SortLists(list1, list2);
             int sumOfDistances = CalculateSumOfDistances(sortedList1, sortedList2);
 
-            Console.WriteLine("Sum of Distances: " + sumOfDistances);
+            Console.WriteLine("Day 1 Part 1: Sum of Distances " + sumOfDistances);
         }
 
         public static (List<int>, List<int>) ReadAndProcessData(string filePath)
@@ -57,7 +57,7 @@
             var occurrences = CountOccurrences(sortedList2);
             int similarityScore = CalculateSimilarityScore(sortedList1, occurrences);
 
-            Console.WriteLine("Similarity Score: " + similarityScore);
+            Console.WriteLine("Day 1 Part 2: Similarity Score " + similarityScore);
         }
 
         public static Dictionary<int, int> CountOccurrences(List<int> list2)
