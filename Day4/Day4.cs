@@ -34,9 +34,10 @@ internal class Day4
 
                     for (int i = 0; i < wordLength; i++)
                     {
-                        // Boundary check
                         if (nx < 0 || nx >= rows || ny < 0 || ny >= cols)
+                        {
                             break;
+                        }
 
                         if (grid[nx][ny] != word[i])
                             break;
@@ -47,12 +48,56 @@ internal class Day4
                     }
 
                     if (matched == wordLength)
+                    {
                         count++;
+                    }
                 }
             }
         }
 
         return count;
+    }
+
+    public static void Problem2()
+    {
+        string[] inputReports = File.ReadAllLines(".\\Day4\\Input.txt");
+
+        int count = CountXMASOccurrences(inputReports);
+
+        Console.WriteLine("Day 4 Part 2: " + count);
+    }
+    static int CountXMASOccurrences(string[] grid)
+    {
+        int rows = grid.Length;
+        int cols = grid[0].Length;
+        int count = 0;
+
+        for (int x = 0; x < rows - 2; x++)
+        {
+            for (int y = 0; y < cols - 2; y++)
+            {
+                if (IsXMAS(grid, x, y))
+                {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+
+    static bool IsXMAS(string[] grid, int x, int y)
+    {
+        char topLeft = grid[x][y];
+        char topRight = grid[x][y + 2];
+        char middle = grid[x + 1][y + 1];
+        char bottomLeft = grid[x + 2][y];
+        char bottomRight = grid[x + 2][y + 2];
+
+        return (topLeft == 'M' && topRight == 'S' && middle == 'A' && bottomLeft == 'M' && bottomRight == 'S') ||
+               (topLeft == 'S' && topRight == 'M' && middle == 'A' && bottomLeft == 'S' && bottomRight == 'M') ||
+               (topLeft == 'M' && topRight == 'M' && middle == 'A' && bottomLeft == 'S' && bottomRight == 'S') ||
+               (topLeft == 'S' && topRight == 'S' && middle == 'A' && bottomLeft == 'M' && bottomRight == 'M');
     }
 }
 

@@ -13,3 +13,4 @@ Day3Solution.Problem1();
 Day3Solution.Problem2();
 
 Day4Solution.Problem1();
+Day4Solution.Problem2();
