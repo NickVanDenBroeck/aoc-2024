@@ -39,7 +39,7 @@ internal class Day7
             BigInteger targetValue = BigInteger.Parse(parts[0]);
             BigInteger[] numbers = parts[1].Split(' ').Select(BigInteger.Parse).ToArray();
 
-            if (CanMatchTargetValue(numbers, targetValue))
+            if (CanMatchTargetValue(numbers, targetValue, 0, numbers[0]))
             {
                 totalResult += targetValue;
             }
@@ -47,32 +47,27 @@ internal class Day7
 
         return totalResult;
     }
-
-    static bool CanMatchTargetValue(BigInteger[] numbers, BigInteger targetValue)
+    static bool CanMatchTargetValue(BigInteger[] numbers, BigInteger targetValue, int index, BigInteger current)
     {
-        int operatorCount = numbers.Length - 1;
-        int combinations = 1 << operatorCount;
-
-        for (int i = 0; i < combinations; i++)
+        // Base case: if all numbers are used, check if the result matches the target
+        if (index == numbers.Length - 1)
         {
-            BigInteger result = numbers[0];
-            int config = i;
-
-            for (int j = 1; j < numbers.Length; j++)
-            {
-                int op = config & 1;
-                config >>= 1;
-
-                result = op == 0 ? result + numbers[j] : result * numbers[j];
-            }
-
-            if (result == targetValue)
-            {
-                return true;
-            }
+            return current == targetValue;
         }
 
+        // Try adding the next number
+        if (CanMatchTargetValue(numbers, targetValue, index + 1, current + numbers[index + 1]))
+        {
+            return true;
+        }
+
+        // Try multiplying the next number
+        if (CanMatchTargetValue(numbers, targetValue, index + 1, current * numbers[index + 1]))
+        {
+            return true;
+        }
+
+        // If neither operation works, return false
         return false;
     }
-
 }
