@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System.Diagnostics;
+using System.Numerics;
 
 namespace aoc_2024.Day7;
 
@@ -14,47 +15,55 @@ internal class Day7
             return;
         }
 
-        string[] inputLines = File.ReadAllLines(filePath);
+        Stopwatch stopwatch = Stopwatch.StartNew();
 
-        BigInteger totalCalibrationResult = 0;
+        BigInteger totalCalibrationResult = CalculateTotalCalibrationResult(filePath);
 
-        foreach (var line in inputLines)
+        stopwatch.Stop();
+
+        Console.WriteLine($"Day 7 Part 1: Total Calibration Result: {totalCalibrationResult} => Execution Time: {stopwatch.ElapsedMilliseconds} ms");
+    }
+
+    static BigInteger CalculateTotalCalibrationResult(string filePath)
+    {
+        BigInteger totalResult = 0;
+
+        foreach (string line in File.ReadLines(filePath))
         {
             if (string.IsNullOrWhiteSpace(line))
+            {
                 continue;
+            }
 
             var parts = line.Split(": ");
             BigInteger targetValue = BigInteger.Parse(parts[0]);
-            var numbers = parts[1].Split(' ').Select(BigInteger.Parse).ToArray();
-                      
+            BigInteger[] numbers = parts[1].Split(' ').Select(BigInteger.Parse).ToArray();
+
             if (CanMatchTargetValue(numbers, targetValue))
             {
-                totalCalibrationResult += targetValue;
+                totalResult += targetValue;
             }
         }
 
-        Console.WriteLine($"Total Calibration Result: {totalCalibrationResult}");
+        return totalResult;
     }
 
     static bool CanMatchTargetValue(BigInteger[] numbers, BigInteger targetValue)
-    {        
+    {
         int operatorCount = numbers.Length - 1;
-        int combinations = 1 << (2 * operatorCount);
+        int combinations = 1 << operatorCount;
 
         for (int i = 0; i < combinations; i++)
         {
             BigInteger result = numbers[0];
-            int index = i;
+            int config = i;
 
             for (int j = 1; j < numbers.Length; j++)
             {
-                int op = index % 2;
-                index /= 2;
+                int op = config & 1;
+                config >>= 1;
 
-                if (op == 0)
-                    result += numbers[j];
-                else
-                    result *= numbers[j];
+                result = op == 0 ? result + numbers[j] : result * numbers[j];
             }
 
             if (result == targetValue)
