@@ -23,5 +23,5 @@ Day5Solution.Problem2();
 
 //Day6Solution.Part1();
 
-Day7Solution.Part1();
+Day7Solution.Solution();
 

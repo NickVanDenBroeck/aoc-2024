@@ -5,7 +5,7 @@ namespace aoc_2024.Day7;
 
 internal class Day7
 {
-    public static void Part1()
+    public static void Solution()
     {
         string filePath = ".\\Day7\\input.txt";
 
