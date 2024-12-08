@@ -49,25 +49,21 @@ internal class Day7
     }
     static bool CanMatchTargetValue(BigInteger[] numbers, BigInteger targetValue, int index, BigInteger current)
     {
-        // Base case: if all numbers are used, check if the result matches the target
         if (index == numbers.Length - 1)
         {
             return current == targetValue;
         }
 
-        // Try adding the next number
         if (CanMatchTargetValue(numbers, targetValue, index + 1, current + numbers[index + 1]))
         {
             return true;
         }
 
-        // Try multiplying the next number
         if (CanMatchTargetValue(numbers, targetValue, index + 1, current * numbers[index + 1]))
         {
             return true;
         }
 
-        // If neither operation works, return false
         return false;
     }
 }
